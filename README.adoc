@@ -1,0 +1,91 @@
+# FreeRtos Examples
+
+## Supported CompuLab Machines
+
+### `cl-som-imx8`
+
+#### Basic setup
+The demo applications are loaded from MMC to TCM.
+
+* U-Boot environment:
+[source,console]
+setenv m4_loadaddr 0x7e0000
+setenv m4_start 'load mmc 1 ${m4_loadaddr} ${m4_file}; dcache flush; bootaux ${m4_loadaddr}'
+saveenv
+
+* UART1 configured as the M4-Uart console. SB-iMX8M P20 header is in use.
+[source,console]
+P20.P19 - UART1_TXD
+P20.P21 - UART1_RXD
+P20.P33 - GND
+
+#### Pre-Built Demo applications
+* https://github.com/compulab-yokneam/freertos-samples-bin/raw/master/cl-som-imx8/hello_world.bin[`hello_world.bin`]
+** U-Boot
+[source,console]
+setenv m4_file hello_world.bin; run m4_start
+** M4-Uart console 
+[source,console]
+CL-SOM-iMX8 > hello world.
+
+* https://github.com/compulab-yokneam/freertos-samples-bin/raw/master/cl-som-imx8/igpio_led_output.bin[`igpio_led_output.bin`]
+** U-Boot
+[source,console]
+setenv m4_file igpio_led_output.bin; run m4_start
+** M4-Uart console 
+[source,console]
+Board: CL-SOM-iMX8
+GPIO Driver example
+The LED is blinking.
+GPIO_DR& 0x30200000 ; PIN# 12
+
+* https://github.com/compulab-yokneam/freertos-samples-bin/raw/master/cl-som-imx8/rpmsg_lite_str_echo_rtos_imxcm4.bin[`rpmsg_lite_str_echo_rtos_imxcm4.bin`]
+** U-Boot
+[source,console]
+setenv m4_file rpmsg_lite_str_echo_rtos_imxcm4.bin; run m4_start; boot
+** M4-Uart console
+[source,console]
+Board: CL-SOM-iMX8
+RPMSG String Echo FreeRTOS RTOS API Demo...
+Nameservice sent, ready for incoming messages...
+** OS
+[source,console]
+dmesg -c > /dev/null
+modprobe imx_rpmsg_tty                                                                                                     dmesg 
+[   41.088386] imx_rpmsg_tty virtio0.rpmsg-virtual-tty-channel-1.-1.30: new channel: 0x400 -> 0x1e!
+[   41.099673] Install rpmsg tty driver!
+[   41.108472] rpmsg_tty_cb68 65 6c 6c 6f 20 77 6f 72 6c 64 21              hello world!
+
+** M4-Uart console
+[source,console]
+Get Message From Master Side : "hello world!" [len : 12]
+
+* https://github.com/compulab-yokneam/freertos-samples-bin/raw/master/cl-som-imx8/rpmsg_lite_pingpong_rtos_linux_remote.bin[`rpmsg_lite_pingpong_rtos_linux_remote.bin`]
+** U-Boot
+[source,console]
+setenv m4_file rpmsg_lite_pingpong_rtos_linux_remote.bin; run m4_start; boot
+** M4-Uart console 
+[source,console]
+Board: CL-SOM-iMX8
+RPMSG Ping-Pong FreeRTOS RTOS API Demo...
+RPMSG Share Base Addr is 0xb8000000
+Link is up!
+Nameservice announce sent.
+** OS
+[source,console]
+dmesg -c > /dev/null
+modprobe imx_rpmsg_pingpong
+dmesg
+[   30.420794] imx_rpmsg_pingpong virtio0.rpmsg-openamp-demo-channel.-1.30: new channel: 0x400 -> 0x1e!
+[   30.433498] get 1 (src: 0x1e)
+ ....                                                                            
+[   30.665919] get 101 (src: 0x1e)
+[   30.669131] imx_rpmsg_pingpong virtio0.rpmsg-openamp-demo-channel.-1.30: goodbye!
+
+** M4-Uart console 
+[source,console]
+Waiting for ping...
+Sending pong...
+ ....
+Ping pong done, deinitializing...
+Looping forever...
