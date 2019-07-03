@@ -83,6 +83,7 @@ RPMSG Share Base Addr is 0xb8000000
 Link is up!
 Nameservice announce sent.
 ** OS
+*** maunal load
 [source,console]
 dmesg -c > /dev/null
 modprobe imx_rpmsg_pingpong
@@ -92,6 +93,15 @@ dmesg
  ....                                                                            
 [   30.665919] get 101 (src: 0x1e)
 [   30.669131] imx_rpmsg_pingpong virtio0.rpmsg-openamp-demo-channel.-1.30: goodbye!
+
+*** auto load
+[source,console]
+# This approach shows how to make the system load the driver automatically at the boot time.
+# It is up to the user to prepare the boot environment that loads an m4-ping-pong demo before starting kernel.
+cat << eof > /etc/modules-load.d/imx_rpmsg_pingpong.conf
+imx_rpmsg_pingpong
+eof
+reboot
 
 ** M4 console
 [source,console]
