@@ -63,7 +63,8 @@ Nameservice sent, ready for incoming messages...
 ** OS
 [source,console]
 dmesg -c > /dev/null
-modprobe imx_rpmsg_tty                                                                                                     dmesg 
+modprobe imx_rpmsg_tty
+dmesg 
 [   41.088386] imx_rpmsg_tty virtio0.rpmsg-virtual-tty-channel-1.-1.30: new channel: 0x400 -> 0x1e!
 [   41.099673] Install rpmsg tty driver!
 [   41.108472] rpmsg_tty_cb68 65 6c 6c 6f 20 77 6f 72 6c 64 21              hello world!
