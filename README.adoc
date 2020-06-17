@@ -111,3 +111,44 @@ Sending pong...
  ....
 Ping pong done, deinitializing...
 Looping forever...
+
+## JTAG Debugging
+* Requirements:
+** HW: http://dangerousprototypes.com/docs/Bus_Blaster[Bus Blaster v3]
+** SW: http://openocd.org/[OpenOCD]
+** Integration and configuration: https://www.biglakesoftware.com/open-source-jtag-debugging[Open Source JTAG Debugging]
+* How to:
+** Target is a `ucm-imx8m-mini` SOC.
+*** U-Boot console:
+[source,console]
+setenv m4_file hello_world.bin; run m4_start
+** Host is a development Linux machine.
+*** BackEnd
+[source,console]
+sudo openocd -f ~/openocd/tcl/interface/ftdi/dp_busblaster.cfg -f ~/openocd/tcl/board/nxp_mcimx8m-evk.cfg
+*** Monitor
+**** get connected to the `openocd:4444`, switch to the `imx8mq.m4` and examine:
+[source,console]
+telnet localhost 4444
+> targets imx8mq.m4
+> imx8mq.m4 arp_examine
+imx8mq.m4: hardware has 6 breakpoints, 4 watchpoints
+> targets              
+    TargetName         Type       Endian TapName            State       
+--  ------------------ ---------- ------ ------------------ ------------
+ 0  imx8mq.a53.0       aarch64    little imx8mq.cpu         running
+ 1  imx8mq.a53.1       aarch64    little imx8mq.cpu         examine deferred
+ 2  imx8mq.a53.2       aarch64    little imx8mq.cpu         examine deferred
+ 3  imx8mq.a53.3       aarch64    little imx8mq.cpu         examine deferred
+ 4* imx8mq.m4          cortex_m   little imx8mq.cpu         running
+ 5  imx8mq.ahb         mem_ap     little imx8mq.cpu         running
+*** Front End
+**** get connected to the `openocd:3334`, resume the `m4`:
+[source,console]
+${CROSS_COMPILE}gdb /path/to/igpio_led_output.elf
+(gdb) target remote :3334
+Remote debugging using :3334
+delay () at /path/to/rtos/freertos/imx8mm/boards/ucm-imx8m-mini/driver_examples/gpio/led_output/gpio_led_output.c:41
+41          for (i = 0; i < EXAMPLE_DELAY_COUNT; ++i)
+(gdb) continue
+Continuing.
