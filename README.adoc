@@ -13,13 +13,17 @@
 ** https://github.com/compulab-yokneam/freertos-samples-bin/raw/master/ucm-imx8m-mini/rpmsg_lite_str_echo_rtos_imxcm4.bin[`rpmsg_lite_str_echo_rtos_imxcm4.bin`]
 ** https://github.com/compulab-yokneam/freertos-samples-bin/raw/master/ucm-imx8m-mini/rpmsg_lite_pingpong_rtos_linux_remote.bin[`rpmsg_lite_pingpong_rtos_linux_remote.bin`]
 
+* `mcm-imx8m-mini`
+** https://github.com/compulab-yokneam/freertos-samples-bin/raw/master/ucm-imx8m-mini/hello_world.bin[`hello_world.bin`]
+** https://github.com/compulab-yokneam/freertos-samples-bin/raw/master/ucm-imx8m-mini/igpio_led_output.bin[`igpio_led_output.bin`]
+
 #### Basic setup
 The demo applications are loaded from MMC to TCM.
 
 * U-Boot environment:
 [source,console]
 setenv m4_loadaddr 0x7e0000
-setenv m4_start 'load mmc 1 ${m4_loadaddr} ${m4_file}; dcache flush; bootaux ${m4_loadaddr}'
+setenv m4_start 'load mmc 1 0x48000000 ${m4_file}; cp.b 0x48000000 ${m4_loadaddr} 0x20000; dcache flush; bootaux ${m4_loadaddr}'
 saveenv
 
 * UART1 configured as the M4 debug console.
@@ -32,6 +36,13 @@ P20.P33 - GND
 ** `ucm-imx8m-mini`
 [source,console]
 SB-UCM-iMX8 P16 connector is in use.
+
+** `mcm-imx8m-mini`
+[source,console]
+SB-MCM-iMX8-Mini P20 header is in use.
+P20.P9  - UART1_TXD
+P20.P11 - UART1_RXD
+P20.P31 - GND
 
 #### Demo Applications How To
 * `hello_world.bin`
