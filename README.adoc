@@ -13,6 +13,12 @@
 ** https://github.com/compulab-yokneam/freertos-samples-bin/raw/master/ucm-imx8m-mini/rpmsg_lite_str_echo_rtos_imxcm4.bin[`rpmsg_lite_str_echo_rtos_imxcm4.bin`]
 ** https://github.com/compulab-yokneam/freertos-samples-bin/raw/master/ucm-imx8m-mini/rpmsg_lite_pingpong_rtos_linux_remote.bin[`rpmsg_lite_pingpong_rtos_linux_remote.bin`]
 
+* `iot-gate-imx8`
+** https://github.com/compulab-yokneam/freertos-samples-bin/raw/master/iot-gate-imx8/hello_world.bin[`hello_world.bin`]
+** https://github.com/compulab-yokneam/freertos-samples-bin/raw/master/iot-gate-imx8/igpio_led_output.bin[`igpio_led_output.bin`]
+** https://github.com/compulab-yokneam/freertos-samples-bin/raw/master/iot-gate-imx8/rpmsg_lite_str_echo_rtos_imxcm4.bin[`rpmsg_lite_str_echo_rtos_imxcm4.bin`]
+** https://github.com/compulab-yokneam/freertos-samples-bin/raw/master/iot-gate-imx8/rpmsg_lite_pingpong_rtos_linux_remote.bin[`rpmsg_lite_pingpong_rtos_linux_remote.bin`]
+
 * `mcm-imx8m-mini`
 ** https://github.com/compulab-yokneam/freertos-samples-bin/raw/master/ucm-imx8m-mini/hello_world.bin[`hello_world.bin`]
 ** https://github.com/compulab-yokneam/freertos-samples-bin/raw/master/ucm-imx8m-mini/igpio_led_output.bin[`igpio_led_output.bin`]
@@ -43,6 +49,16 @@ SB-MCM-iMX8-Mini P20 header is in use.
 P20.P9  - UART1_TXD
 P20.P11 - UART1_RXD
 P20.P31 - GND
+
+* UART2 configured as the M4 debug console.
+** `iot-gate-imx8`
+*** The IED-BASE module should be installed on the SB-IOTGIMX8 base board.
+*** IED-RS232 should be installed in socket A of the IE-BASE module.
+[source,console]
+IED-BASE P2 header is in use.
+P2.P1 - UART2_TXD
+P2.P3 - UART2_RXD
+P2.P2 - GND
 
 #### Demo Applications How To
 * `hello_world.bin`
