@@ -1,0 +1,70 @@
+# M7 imx8mp how to
+
+# Folder layout
+```
+├── doc
+│   ├── Getting Started with MCUXpresso SDK for EVK-MIMX8MP.pdf -- NXP Manual
+│   ├── hello_world.txt -- hello_world.bin manual
+│   ├── pinpong.txt     -- rpmsg_lite_pingpong_rtos_linux_remote.bin manual
+│   └── str_echo.txt    -- rpmsg_lite_str_echo_rtos.bin
+├── dtb
+│   ├── som-imx8m-plus-rpmsg.dtb -- som-imx8m-plus device tree for rpms examples
+│   └── ucm-imx8m-plus-rpmsg.dtb -- ucm-imx8m-plus device tree for rpms examples
+└── sample_code
+    ├── ddr
+    │   ├── hello_world.bin
+    │   ├── rpmsg_lite_pingpong_rtos_linux_remote.bin
+    │   └── rpmsg_lite_str_echo_rtos.bin
+    ├── flash
+    │   ├── hello_world.bin
+    │   ├── rpmsg_lite_pingpong_rtos_linux_remote.bin
+    │   └── rpmsg_lite_str_echo_rtos.bin
+    └── tcm
+        ├── hello_world.bin
+        ├── rpmsg_lite_pingpong_rtos_linux_remote.bin
+        └── rpmsg_lite_str_echo_rtos.bin
+```
+
+* Requirements
+** CompuLab ucm-imx8m-plus evaluation board
+** Precompiled M7 binaries
+** NXP Getting Started
+
+# HW Setup connectivity:
+* A53 debug console uart2
+* M7 debug console uart4/P18
+
+In this example all M7 binaries get loaded using tftpboot command.
+It is up to the user to use any available media to load these binaries from.
+
+# Common settings
+```
+setenv sip 192.168.XX.YY
+setenv free_rtos_sample hello_world.bin
+```
+# TCM
+```
+tftpboot ${loadaddr} ${sip}:imx8mp/tcm/${free_rtos_sample}
+cp.b ${loadaddr} 0x7e0000 ${filesize}
+bootaux 0x7e0000
+```
+# DDR
+```
+tftpboot ${loadaddr} ${sip}:imx8mp/ddr/${free_rtos_sample}
+dcache flush
+bootaux ${loadaddr}
+```
+# SPI/flash
+```
+tftpboot ${loadaddr} ${sip}:imx8mp/flash/${free_rtos_sample}
+dcache flush
+sf probe; sf erase 0 0x100000
+sf write ${loadaddr} 0 ${filesize}
+sf read ${loadaddr} 0 4
+bootaux 0x8000000
+```
+# Issue M7 code run from SPI flash after reset
+```
+sf probe; sf read ${loadaddr} 0 4
+bootaux 0x8000000
+```
