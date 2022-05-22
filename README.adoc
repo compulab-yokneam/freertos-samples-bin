@@ -14,10 +14,10 @@
 ** https://github.com/compulab-yokneam/freertos-samples-bin/raw/master/ucm-imx8m-mini/rpmsg_lite_pingpong_rtos_linux_remote.bin[`rpmsg_lite_pingpong_rtos_linux_remote.bin`]
 
 * `iot-gate-imx8`
-** https://github.com/compulab-yokneam/freertos-samples-bin/raw/master/iot-gate-imx8/hello_world.bin[`hello_world.bin`]
-** https://github.com/compulab-yokneam/freertos-samples-bin/raw/master/iot-gate-imx8/igpio_led_output.bin[`igpio_led_output.bin`]
-** https://github.com/compulab-yokneam/freertos-samples-bin/raw/master/iot-gate-imx8/rpmsg_lite_str_echo_rtos_imxcm4.bin[`rpmsg_lite_str_echo_rtos_imxcm4.bin`]
-** https://github.com/compulab-yokneam/freertos-samples-bin/raw/master/iot-gate-imx8/rpmsg_lite_pingpong_rtos_linux_remote.bin[`rpmsg_lite_pingpong_rtos_linux_remote.bin`]
+** https://github.com/compulab-yokneam/freertos-samples-bin/raw/lf-5.10.72-2.2.0/iot-gate-imx8/hello_world.bin[`hello_world.bin`]
+** https://github.com/compulab-yokneam/freertos-samples-bin/raw/lf-5.10.72-2.2.0/iot-gate-imx8/igpio_led_output.bin[`igpio_led_output.bin`]
+** https://github.com/compulab-yokneam/freertos-samples-bin/raw/lf-5.10.72-2.2.0/iot-gate-imx8/rpmsg_lite_str_echo_rtos.bin[`rpmsg_lite_str_echo_rtos.bin`]
+** https://github.com/compulab-yokneam/freertos-samples-bin/raw/lf-5.10.72-2.2.0/iot-gate-imx8/rpmsg_lite_pingpong_rtos_linux_remote.bin[`rpmsg_lite_pingpong_rtos_linux_remote.bin`]
 
 * `mcm-imx8m-mini`
 ** https://github.com/compulab-yokneam/freertos-samples-bin/raw/master/ucm-imx8m-mini/hello_world.bin[`hello_world.bin`]
@@ -79,10 +79,10 @@ GPIO Driver example
 The LED is blinking.
 GPIO_DR& 0x30200000 ; PIN# 12
 
-* `rpmsg_lite_str_echo_rtos_imxcm4.bin`
+* `rpmsg_lite_str_echo_rtos.bin`
 ** U-Boot
 [source,console]
-setenv m4_file rpmsg_lite_str_echo_rtos_imxcm4.bin; run m4_start; boot
+setenv m4_file rpmsg_lite_str_echo_rtos.bin; run m4_start; boot
 ** M4 console
 [source,console]
 RPMSG String Echo FreeRTOS RTOS API Demo...
