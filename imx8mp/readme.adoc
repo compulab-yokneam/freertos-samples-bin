@@ -15,6 +15,10 @@
     │   ├── hello_world.bin
     │   ├── rpmsg_lite_pingpong_rtos_linux_remote.bin
     │   └── rpmsg_lite_str_echo_rtos.bin
+    ├── elf
+    │   ├── imx8mp_m7_TCM_hello_world.elf
+    │   ├── imx8mp_m7_TCM_rpmsg_lite_pingpong_rtos_linux_remote.elf
+    │   └── imx8mp_m7_TCM_rpmsg_lite_str_echo_rtos.elf
     ├── flash
     │   ├── hello_world.bin
     │   ├── rpmsg_lite_pingpong_rtos_linux_remote.bin
