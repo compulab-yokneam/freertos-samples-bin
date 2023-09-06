@@ -81,14 +81,23 @@ fw_setenv fdtfile ucm-imx8m-plus-rpmsg.dtb
 fw_setenv bootcmd 'run bsp_bootcmd'
 reboot
 ```
-* sample: imx8mp_m7_TCM_hello_world.elf
+* Download samples' files:
 ```
+mkdir -p /lib/firmware/imx
+wget --directory-prefix /lib/firmware/imx https://github.com/compulab-yokneam/freertos-samples-bin/raw/m7/imx8mp/sample_code/elf/imx8mp_m7_TCM_hello_world.elf
+wget --directory-prefix /lib/firmware/imx https://github.com/compulab-yokneam/freertos-samples-bin/raw/m7/imx8mp/sample_code/elf/imx8mp_m7_TCM_rpmsg_lite_str_echo_rtos.elf
+
+```
+* run sample: imx8mp_m7_TCM_hello_world.elf
+```
+echo stop >  /sys/class/remoteproc/remoteproc0/state
 echo -n "imx8mp_m7_TCM_hello_world.elf" > /sys/class/remoteproc/remoteproc0/firmware
 echo start >  /sys/class/remoteproc/remoteproc0/state
 ```
 
-* sample: imx8mp_m7_TCM_rpmsg_lite_str_echo_rtos.elf
+* run sample: imx8mp_m7_TCM_rpmsg_lite_str_echo_rtos.elf
 ```
+echo stop >  /sys/class/remoteproc/remoteproc0/state
 echo -n "imx8mp_m7_TCM_rpmsg_lite_str_echo_rtos.elf" > /sys/class/remoteproc/remoteproc0/firmware
 echo start >  /sys/class/remoteproc/remoteproc0/state
 modprobe imx_rpmsg_tty
