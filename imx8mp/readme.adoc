@@ -72,3 +72,25 @@ bootaux 0x8000000
 sf probe; sf read ${loadaddr} 0 4
 bootaux 0x8000000
 ```
+
+# Linux Kernel loading elf m7 binaries
+* Prepare the boot environment:
+```
+fw_setenv root_opt "$(fw_printenv root_opt) clk-imx8mp.mcore_booted"
+fw_setenv fdtfile ucm-imx8m-plus-rpmsg.dtb
+fw_setenv bootcmd 'run bsp_bootcmd'
+reboot
+```
+* sample: imx8mp_m7_TCM_hello_world.elf
+```
+echo -n "imx8mp_m7_TCM_hello_world.elf" > /sys/class/remoteproc/remoteproc0/firmware
+echo start >  /sys/class/remoteproc/remoteproc0/state
+```
+
+* sample: imx8mp_m7_TCM_rpmsg_lite_str_echo_rtos.elf
+```
+echo -n "imx8mp_m7_TCM_rpmsg_lite_str_echo_rtos.elf" > /sys/class/remoteproc/remoteproc0/firmware
+echo start >  /sys/class/remoteproc/remoteproc0/state
+modprobe imx_rpmsg_tty
+echo "Hello From Linux $(date)" >  /dev/ttyRPMSG30
+```
