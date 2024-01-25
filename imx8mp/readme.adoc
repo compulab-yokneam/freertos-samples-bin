@@ -83,9 +83,9 @@ reboot
 ```
 * Download samples' files:
 ```
-mkdir -p /lib/firmware/imx
-wget --directory-prefix /lib/firmware/imx https://github.com/compulab-yokneam/freertos-samples-bin/raw/m7/imx8mp/sample_code/elf/imx8mp_m7_TCM_hello_world.elf
-wget --directory-prefix /lib/firmware/imx https://github.com/compulab-yokneam/freertos-samples-bin/raw/m7/imx8mp/sample_code/elf/imx8mp_m7_TCM_rpmsg_lite_str_echo_rtos.elf
+mkdir -p /lib/firmware
+wget --directory-prefix /lib/firmware https://github.com/compulab-yokneam/freertos-samples-bin/raw/m7/imx8mp/sample_code/elf/imx8mp_m7_TCM_hello_world.elf
+wget --directory-prefix /lib/firmware https://github.com/compulab-yokneam/freertos-samples-bin/raw/m7/imx8mp/sample_code/elf/imx8mp_m7_TCM_rpmsg_lite_str_echo_rtos.elf
 
 ```
 * run sample: imx8mp_m7_TCM_hello_world.elf
