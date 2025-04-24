@@ -76,7 +76,7 @@ bootaux 0x8000000
 # Linux Kernel loading elf m7 binaries
 * Prepare the boot environment:
 ```
-fw_setenv root_opt "$(fw_printenv root_opt) clk-imx8mp.mcore_booted"
+fw_setenv root_opt "$(fw_printenv root_opt | awk -F"=" '$0=$2') clk-imx8mp.mcore_booted"
 fw_setenv fdtfile ucm-imx8m-plus-rpmsg.dtb
 fw_setenv bootcmd 'run bsp_bootcmd'
 reboot
